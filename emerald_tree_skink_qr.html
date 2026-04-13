@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Emerald Tree Skink — QR 카드</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+KR:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    background: #e6eae2;
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 20px;
+  }
+
+  .card {
+    width: 70mm;
+    border-radius: 5mm;
+    overflow: hidden;
+    background: #0c1a08;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  }
+
+  .card-header {
+    position: relative;
+    padding: 6mm 6mm 5mm;
+    background: #112010;
+    overflow: hidden;
+  }
+  .card-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 75%, rgba(120,220,80,0.3) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(200,240,100,0.15) 0%, transparent 50%);
+  }
+  .card-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -38deg,
+      transparent 0px, transparent 5mm,
+      rgba(120,220,80,0.04) 5mm, rgba(120,220,80,0.04) 5.3mm
+    );
+  }
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-kicker {
+    font-size: 6pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(120,220,80,0.7);
+    margin-bottom: 1.5mm;
+  }
+  .header-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15pt;
+    line-height: 1.1;
+    color: #fff;
+  }
+  .header-name .hl { color: #78dc50; }
+  .header-sci {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 7pt;
+    color: rgba(255,255,255,0.32);
+    margin-top: 1mm;
+  }
+  .header-illo {
+    font-size: 32pt;
+    filter: drop-shadow(0 0 4mm rgba(120,220,80,0.55));
+    flex-shrink: 0;
+    margin-left: 3mm;
+  }
+
+  .qr-section {
+    padding: 5mm 6mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3mm;
+  }
+  .qr-box {
+    background: #fff;
+    border-radius: 3mm;
+    padding: 3mm;
+    width: 52mm;
+    height: 52mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-box canvas,
+  .qr-box img { width: 46mm !important; height: 46mm !important; }
+
+  .qr-hint {
+    font-size: 7.5pt;
+    color: #3a6e28;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .qr-hint strong { color: #b0f080; font-weight: 400; }
+
+  .card-footer {
+    background: #0c1a08;
+    border-top: 0.3mm solid #162810;
+    padding: 2.5mm 6mm;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #1e3c10;
+  }
+  .footer-dot {
+    width: 2mm;
+    height: 2mm;
+    border-radius: 50%;
+    background: #78dc50;
+    box-shadow: 0 0 3mm rgba(120,220,80,0.65);
+  }
+
+  @media print {
+    @page { size: A4; margin: 20mm; }
+    body { background: white; min-height: unset; display: block; }
+    .card { box-shadow: none; margin: 0 auto; }
+    .screen-only { display: none; }
+  }
+
+  .screen-only { display: flex; gap: 10px; }
+  .btn-print {
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    background: #0c1a08;
+    color: #78dc50;
+    border: 1px solid #1e3c10;
+  }
+  .btn-print:hover { background: #112010; }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="card-header">
+    <div class="header-inner">
+      <div>
+        <div class="header-kicker">Scincidae · 스킨크과</div>
+        <div class="header-name">에메랄드<br>트리 <span class="hl">스킨크</span></div>
+        <div class="header-sci">Lamprolepis smaragdina</div>
+      </div>
+      <div class="header-illo">🦎</div>
+    </div>
+  </div>
+
+  <div class="qr-section">
+    <div class="qr-box" id="qr"></div>
+    <p class="qr-hint">QR코드를 스캔하면<br><strong>상세 정보</strong>를 볼 수 있어요</p>
+  </div>
+
+  <div class="card-footer">
+    <span class="footer-label">Vivarium · 비바리움</span>
+    <div class="footer-dot"></div>
+  </div>
+
+</div>
+
+<div class="screen-only">
+  <button class="btn-print" onclick="window.print()">🖨️ 인쇄하기</button>
+</div>
+
+<script>
+  // ▼ GitHub에 emerald_tree_skink.html 업로드 후 실제 URL로 변경하세요
+  new QRCode(document.getElementById("qr"), {
+    text: "https://solbyeol0305.github.io/emerald_tree_skink.html/emerald_tree_skink.html",
+    width: 174,
+    height: 174,
+    colorDark: "#0c1a08",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  document.fonts.ready.then(() => {
+    setTimeout(() => window.print(), 600);
+  });
+</script>
+
+</body>
+</html>

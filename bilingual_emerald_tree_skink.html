@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emerald Tree Skink</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+KR:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#081508;--surface:#0e2010;--surface2:#142c14;--accent:#78dc50;--accent2:#b0f080;--gold:#f0e060;--text:#cceebb;--muted:#4a8a38;--border:#1e3c10;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh;padding-bottom:60px;}
+body.en{font-family:'Inter',sans-serif;}
+.lang-bar{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);padding:10px 20px;display:flex;justify-content:flex-end;}
+.lang-btn{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.lang-btn button{padding:6px 16px;font-size:12px;font-weight:500;border:none;background:transparent;color:var(--muted);cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;}
+.lang-btn button.active{background:var(--accent);color:#0a0a0a;font-weight:500;}
+.hero{position:relative;height:260px;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 65%,rgba(120,220,80,0.22) 0%,transparent 52%),linear-gradient(170deg,#112010 0%,#081508 100%);}
+.hero-bg::after{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(-32deg,transparent 0px,transparent 15px,rgba(120,220,80,0.03) 15px,rgba(120,220,80,0.03) 16px);}
+.hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 28px;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(120,220,80,0.1);border:1px solid rgba(120,220,80,0.25);color:var(--accent);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:12px;width:fit-content;}
+.hero-name{font-family:'Playfair Display',serif;font-size:34px;line-height:1.05;color:#fff;}
+.hero-name span{color:var(--accent);}
+.hero-sci{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--muted);margin-top:5px;}
+.hero-illo{position:absolute;right:16px;bottom:16px;font-size:100px;opacity:0.75;filter:drop-shadow(0 0 28px rgba(120,220,80,0.5));animation:breathe 5s ease-in-out infinite;z-index:1;}
+@keyframes breathe{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(3deg) translateY(-10px)}}
+.body{padding:24px 20px 0;max-width:480px;margin:0 auto;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px;}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 6px;text-align:center;}
+.stat-val{font-family:'Playfair Display',serif;font-size:17px;color:var(--accent2);display:block;line-height:1;}
+.stat-key{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;display:block;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:12px;}
+.card-title{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.card-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.card p{font-size:13.5px;line-height:1.8;color:#98c888;font-weight:300;}
+.origin{display:flex;align-items:center;gap:12px;background:var(--surface2);border-radius:12px;padding:14px 16px;margin-bottom:12px;border:1px solid var(--border);}
+.origin-flag{font-size:28px;}
+.origin-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
+.origin-val{font-size:13.5px;color:var(--text);}
+.habitat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.habitat-item{background:var(--surface2);border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;}
+.habitat-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.habitat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px;}
+.habitat-val{font-size:13px;color:var(--text);font-weight:400;}
+.diet-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.diet-item:last-child{margin-bottom:0;}
+.diet-icon{font-size:18px;flex-shrink:0;}
+.diet-label{font-size:13px;color:#98c888;flex:1;}
+.bar-track{width:70px;height:5px;background:var(--border);border-radius:3px;flex-shrink:0;}
+.bar-fill{height:5px;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--gold));}
+.tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:rgba(120,220,80,0.1);border:1px solid rgba(120,220,80,0.25);color:var(--accent2);font-size:11.5px;padding:5px 12px;border-radius:20px;}
+.funfact{border-left:3px solid var(--accent);background:linear-gradient(to right,rgba(120,220,80,0.08),transparent);border-radius:0 12px 12px 0;padding:14px 16px;margin-top:12px;}
+.funfact-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+.funfact p{font-size:13px;color:#98c888;line-height:1.75;font-weight:300;}
+.funfact p strong{color:var(--accent2);font-weight:400;}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:5px 12px;border-radius:8px;margin-top:10px;}
+.kr{display:block;}.en-t{display:none;}
+body.en .kr{display:none;}body.en .en-t{display:block;}
+span.kr{display:inline;}span.en-t{display:none;}
+body.en span.kr{display:none;}body.en span.en-t{display:inline;}
+</style>
+</head>
+<body id="body">
+<div class="lang-bar">
+  <div class="lang-btn">
+    <button id="btn-kr" class="active" onclick="setLang('kr')">🇰🇷 한국어</button>
+    <button id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+  </div>
+</div>
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-illo">🦎</div>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="kr">● Live Animal · 생물</span><span class="en-t">● Live Animal</span></div>
+    <div class="hero-name"><span class="kr">에메랄드 트리 <span>스킨크</span></span><span class="en-t">Emerald Tree <span>Skink</span></span></div>
+    <div class="hero-sci">Lamprolepis smaragdina</div>
+  </div>
+</div>
+<div class="body">
+  <div class="stats"><div class="stat"><span class="stat-val">25cm</span><span class="stat-key kr">최대 전장</span><span class="stat-key en-t">Max Length</span></div><div class="stat"><span class="stat-val">10년</span><span class="stat-key kr">수명</span><span class="stat-key en-t">Lifespan</span></div><div class="stat"><span class="stat-val">70%</span><span class="stat-key kr">습도</span><span class="stat-key en-t">Humidity</span></div><div class="stat"><span class="stat-val">35°C</span><span class="stat-key kr">바스킹</span><span class="stat-key en-t">Basking</span></div></div>
+  <div class="origin">
+    <div class="origin-flag">🌏</div>
+    <div>
+      <div class="origin-label kr">원산지 · Origin</div>
+      <div class="origin-label en-t">Origin</div>
+      <div class="origin-val kr">동남아시아 — 필리핀 · 인도네시아 · 뉴기니 열대우림</div>
+      <div class="origin-val en-t">Southeast Asia — Philippines, Indonesia & New Guinea</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title kr">소개</div>
+    <div class="card-title en-t">About</div>
+    <p class="kr">동남아시아 열대우림의 나무 줄기를 재빠르게 오르내리며 생활하는 주행성 스킨크입니다. 선명한 에메랄드 그린 광택 비늘과 <strong>노란 눈꺼풀</strong>이 특징이며, 활발하고 호기심 많은 성격으로 관찰용 파충류로 인기가 높습니다.</p>
+    <p class="en-t">A dazzling diurnal skink native to the tropical rainforests of Southeast Asia. Recognized by its brilliant emerald-green glossy scales and bright <strong>yellow eyelids</strong>, it spends most of its time sprinting up and down tree trunks.</p>
+    
+  </div>
+  <div class="card">
+    <div class="card-title kr">사육 환경</div>
+    <div class="card-title en-t">Housing</div>
+    <div class="habitat-grid"><div class="habitat-item"><span class="habitat-icon">🌡</span><div><span class="habitat-label kr">주간 온도</span><span class="habitat-label en-t">Day Temp</span><span class="habitat-val kr">26~30°C</span><span class="habitat-val en-t">26–30°C</span></div></div><div class="habitat-item"><span class="habitat-icon">☀️</span><div><span class="habitat-label kr">바스킹</span><span class="habitat-label en-t">Basking</span><span class="habitat-val">35°C</span></div></div><div class="habitat-item"><span class="habitat-icon">🌙</span><div><span class="habitat-label kr">야간 온도</span><span class="habitat-label en-t">Night Temp</span><span class="habitat-val kr">20~22°C</span><span class="habitat-val en-t">20–22°C</span></div></div><div class="habitat-item"><span class="habitat-icon">💧</span><div><span class="habitat-label kr">습도</span><span class="habitat-label en-t">Humidity</span><span class="habitat-val kr">65~80%</span><span class="habitat-val en-t">65–80%</span></div></div><div class="habitat-item"><span class="habitat-icon">💡</span><div><span class="habitat-label kr">UVB 조명</span><span class="habitat-label en-t">UVB Lighting</span><span class="habitat-val kr">필수 · 12시간</span><span class="habitat-val en-t">Required · 12 hrs</span></div></div><div class="habitat-item"><span class="habitat-icon">🌿</span><div><span class="habitat-label kr">비바리움</span><span class="habitat-label en-t">Vivarium</span><span class="habitat-val kr">수직형 · 식물 필수</span><span class="habitat-val en-t">Vertical · Live plants</span></div></div></div>
+  </div>
+  <div class="card">
+    <div class="card-title kr">먹이</div>
+    <div class="card-title en-t">Diet</div>
+    <div class="diet-item"><span class="diet-icon">🦗</span><span class="diet-label kr">귀뚜라미 · 두비아 로치</span><span class="diet-label en-t">Crickets · Dubia roaches</span><div class="bar-track"><div class="bar-fill" style="width:95%"></div></div></div><div class="diet-item"><span class="diet-icon">🐛</span><span class="diet-label kr">밀웜 · 호박벌레</span><span class="diet-label en-t">Mealworms · Hornworms</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div><div class="diet-item"><span class="diet-icon">🍓</span><span class="diet-label kr">과일 · CGD (간식)</span><span class="diet-label en-t">Fruit / Crested gecko diet (treat)</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div></div><div class="diet-item"><span class="diet-icon">🦴</span><span class="diet-label kr">칼슘·비타민 더스팅 필수</span><span class="diet-label en-t">Calcium & vitamin dusting required</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+  </div>
+  <div class="card">
+    <div class="card-title kr">특징</div>
+    <div class="card-title en-t">Key Facts</div>
+    <div class="tags"><span class="tag kr">🌳 수상생활</span><span class="tag en-t">🌳 Arboreal</span><span class="tag kr">☀️ 주행성</span><span class="tag en-t">☀️ Diurnal</span><span class="tag kr">💎 광택 비늘</span><span class="tag en-t">💎 Glossy scales</span><span class="tag kr">👁 노란 눈꺼풀</span><span class="tag en-t">👁 Yellow eyelids</span><span class="tag kr">⚡ 매우 빠름</span><span class="tag en-t">⚡ Very fast</span><span class="tag kr">🤫 핸들링 비선호</span><span class="tag en-t">🤫 Hands-off pet</span></div>
+  </div>
+  <div class="funfact">
+    <div class="funfact-label kr">✦ 알고 계셨나요?</div>
+    <div class="funfact-label en-t">✦ Did You Know?</div>
+    <p class="kr">에메랄드 트리 스킨크는 야생에서 물그릇보다 <strong>잎에 맺힌 물방울을 핥아</strong> 수분을 섭취하는 것을 더 선호합니다. 나무 줄기를 수직으로 달리는 놀라운 능력도 갖고 있어요!</p>
+    <p class="en-t">In the wild, emerald tree skinks prefer to lick <strong>water droplets off leaves</strong> rather than drink from a dish. They are lightning-fast and can run vertically up tree trunks with ease!</p>
+  </div>
+</div>
+<script>
+function setLang(l){document.getElementById('body').className=l==='en'?'en':'';document.getElementById('btn-kr').className=l==='kr'?'active':'';document.getElementById('btn-en').className=l==='en'?'active':'';localStorage.setItem('lang',l);}
+const s=localStorage.getItem('lang');if(s)setLang(s);
+</script>
+</body>
+</html>
